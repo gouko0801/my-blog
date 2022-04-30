@@ -7,5 +7,5 @@ type Props = {
 };
 
 export const MainTitle: React.FC<Props> = ({ className, title }) => {
-  return <h1 className={className ?? styles.title}>{title}</h1>;
+  return <h1 className={className ?? 'text-2xl'}>{title}</h1>;
 };

@@ -1,12 +1,10 @@
 import { NextPage, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import styles from '../styles/Home.module.css';
 import { getAllPosts, getPostBySlug } from '../lib/api';
 import markdownToHtml from '../lib/markdownToHtml';
 import { Layout } from '../components/organism/layout';
-import { Date } from '../components/atoms/date';
-import { MainTitle } from '../components/atoms/main-title';
+import { Article } from '../components/organism/article';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -51,16 +49,12 @@ const Post: NextPage<Props> = ({ post }) => {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout title={post.title}>
-      <article>
-        <MainTitle title={post.title} />
-        <div className={styles.grid}>
-          <div>
-            <Date date={post.date} />
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
-          </div>
-        </div>
-      </article>
+    <Layout
+      title={post.title}
+    >
+      <Article
+        post={post}
+      />
     </Layout>
   );
 };

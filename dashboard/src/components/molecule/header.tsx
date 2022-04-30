@@ -7,7 +7,9 @@ export const Header = () => {
     <header className={styles.header}>
       <Link href="/">
         <a>
-          <MainTitle title="raiku blog" />
+          <MainTitle
+            title="raiku blog"
+          />
         </a>
       </Link>
     </header>

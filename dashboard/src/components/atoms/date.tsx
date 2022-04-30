@@ -4,8 +4,9 @@ import styles from '../../styles/Home.module.css';
 
 type Props = {
   date: string;
+  className?: string;
 };
 
-export const Date: React.FC<Props> = ({ date }) => {
-  return <p>{date}</p>;
+export const Date: React.FC<Props> = ({ date, className }) => {
+  return <p className={className ?? 'text-gray-400 text-sm'}>{date}</p>;
 };

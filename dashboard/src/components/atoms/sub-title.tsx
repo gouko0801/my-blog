@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import styles from '../../styles/Home.module.css';
 
 type Props = {
   title: string;
+  className?: string;
 };
 
-export const SubTitle: React.FC<Props> = ({ title }) => {
-  return <h2>{title}</h2>;
+export const SubTitle: React.FC<Props> = ({ title, className }) => {
+  return <h2 className={className ?? 'text-xl font-semibold'}>{title}</h2>;
 };

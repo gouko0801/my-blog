@@ -1,14 +1,11 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
+  ],
+  mode: "jit",
+  darkMode: true,
   theme: {
-    extend: {
-      colors: {
-        'twitter': '#1DA1F2',
-      }
-    },
-  },
-  variants: {
     extend: {},
   },
   plugins: [],

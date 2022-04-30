@@ -5,11 +5,12 @@ import { Layout } from '../components/organism/layout';
 import { Date } from '../components/atoms/date';
 import { Tag } from '../components/atoms/tag';
 import { SubTitle } from '../components/atoms/sub-title';
+import { ArticleList } from '../components/molecule/article-list';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts(['slug', 'title', 'date', 'tags']);
+  const allPosts = getAllPosts(['slug', 'title', 'date', 'tags', 'content']);
   return {
     props: { allPosts },
   };
@@ -18,15 +19,9 @@ export const getStaticProps = async () => {
 const Home: NextPage<Props> = ({ allPosts }) => {
   return (
     <Layout>
-      <div className={styles.grid}>
-        {allPosts.map((post) => (
-          <a href={post.slug} className={styles.card} key={post.slug}>
-            <Date date={post.date} />
-            <SubTitle title={post.title} />
-            <Tag tag={post.tags} />
-          </a>
-        ))}
-      </div>
+      <ArticleList
+        posts={allPosts}
+      />
     </Layout>
   );
 };
