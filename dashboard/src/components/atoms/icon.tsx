@@ -9,7 +9,7 @@ type Props = {
 
 export const Icon: React.FC<Props> = ({ className, href }) => {
   return (
-    <li className=''>
+    <li>
       <Link href={href}>
         <a target='_blank'>
           <i className={className}></i>

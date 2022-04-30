@@ -13,9 +13,12 @@ type Props = {
 export const ArticleListItem: React.FC<Props> = ({ post }) => {
   return (
     <li className={styles.card}>
-      <div className='border-solid border-b-2 border-gray-200 pb-2 mb-2'>
+      <div className='border-solid border-b border-gray-200 pb-2 mb-2'>
         <a href={post.slug} key={post.slug}>
-          <SubTitle title={post.title} />
+          <SubTitle
+            title={post.title}
+            className='text-xl'
+          />
           <Date date={post.date} />
           <ItemContent
             content={post.content}

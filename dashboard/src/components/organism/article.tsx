@@ -1,11 +1,10 @@
 import React from 'react';
 import { Post } from '../../lib/api';
-import styles from '../../styles/Home.module.css';
 import { Date } from '../atoms/date';
 import { Tag } from '../atoms/tag';
 import { SubTitle } from '../atoms/sub-title';
 import { Content } from '../atoms/content';
-import { ItemContent } from '../atoms/item-content';
+import { Pager } from '../molecule/pager';
 
 type Props = {
   post: Post;
@@ -13,7 +12,7 @@ type Props = {
 
 export const Article: React.FC<Props> = ({ post }) => {
   return (
-    <article className='container mx-auto'>
+    <article className='container pb-16 mx-auto bg-white p-8 w-1/2 max-w-800 min-w-400'>
       <div className='mb-12'>
         <SubTitle
           title={post.title}
@@ -30,6 +29,7 @@ export const Article: React.FC<Props> = ({ post }) => {
       <Tag
         tag={post.tags}
       />
+      <Pager/>
     </article>
   );
 };

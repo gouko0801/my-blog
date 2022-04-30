@@ -11,7 +11,7 @@ type Props = {
 
 export const Layout: React.FC<Props> = ({ children, title }) => {
   return (
-    <div className={styles.container}>
+    <div className='bg-gray-50'>
       <Meta title={title} />
       <Header />
       <main className={styles.main}>

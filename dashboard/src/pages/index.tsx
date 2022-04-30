@@ -1,11 +1,8 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
-import styles from '../styles/Home.module.css';
 import { getAllPosts } from '../lib/api';
 import { Layout } from '../components/organism/layout';
-import { Date } from '../components/atoms/date';
-import { Tag } from '../components/atoms/tag';
-import { SubTitle } from '../components/atoms/sub-title';
 import { ArticleList } from '../components/molecule/article-list';
+import { Pager } from '../components/molecule/pager';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -22,6 +19,7 @@ const Home: NextPage<Props> = ({ allPosts }) => {
       <ArticleList
         posts={allPosts}
       />
+      <Pager/>
     </Layout>
   );
 };

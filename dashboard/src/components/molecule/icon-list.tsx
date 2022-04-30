@@ -1,13 +1,6 @@
 import React from 'react';
-import { Post } from '../../lib/api';
-import styles from '../../styles/Home.module.css';
 import { Icon } from '../atoms/icon';
-import { ArticleListItem } from './article-list-item';
-
-interface IconListItem {
-  className: string;
-  href: string;
-}
+import { IconListItem } from '../../interface/icon-list-item';
 
 const iconList: IconListItem[]  = [
   {
