@@ -90,7 +90,7 @@ export const getAllPosts = async () => {
   const localPosts = getAllLocalPosts(['slug', 'title', 'date', 'content', 'tags']);
   const gzip = await noteFetch();
   if (gzip) {
-    const notePosts = createNotePosts(gzip);
+    const { notePosts } = createNotePosts(gzip);
     const dto = localPosts.concat(notePosts);
     posts = dto.sort((a, b) => (a.date > b.date ? - 1 : 1));
   } else {
@@ -102,13 +102,13 @@ export const getAllPosts = async () => {
 /**
  * gzip圧縮されたnote APIのレスポンスからnotePostsを作成する
  */
-const createNotePosts = (gzip: any) => {
+export const createNotePosts = (gzip: any): { notePosts: AllPost[], isLastPage: boolean } => {
   let buffer;
   try {
     buffer = gunzipSync(gzip.body._handle.buffer);
   } catch(e) {
     console.log(gzip.body._handle.buffer);
-    return [];
+    return { notePosts: [], isLastPage: false };
   }
   const resBody = buffer.toString('utf8');
   const json = JSON.parse(resBody);
@@ -122,5 +122,6 @@ const createNotePosts = (gzip: any) => {
       isNote: true,
     } as AllPost;
   });
-  return notePosts;
+  const isLastPage: boolean = json.data.isLastPage;
+  return { notePosts, isLastPage };
 };
