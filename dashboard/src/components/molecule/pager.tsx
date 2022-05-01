@@ -12,13 +12,13 @@ export const Pager: React.FC<Props> = ({ prev, next }) => {
     <ul className='flex p-0 mt-8 mb-4 justify-center'>
       {next && (
         <LinkButton
-          content={'<<'}
+          content={'次の記事'}
           href={next!}
         />
       )}
       {prev && (
         <LinkButton
-          content={'>>'}
+          content={'前の記事'}
           href={prev!}
         />
       )}

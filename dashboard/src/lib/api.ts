@@ -40,7 +40,7 @@ export const getPostBySlug = (slug: string, fields: Field[] = []) => {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  // TODO:typeの初期化処理の変更
+  // TODO:itemsの初期化処理の変更
   const items: Post = {
     slug: '',
     content: '',
