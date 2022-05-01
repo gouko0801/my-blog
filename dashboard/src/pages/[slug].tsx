@@ -1,7 +1,7 @@
 import { NextPage, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import { getAllPosts, getPostBySlug } from '../lib/api';
+import { getAllLocalPosts, getAllPosts } from '../lib/api';
 import { markdownToHtml } from '../lib/markdown-to-html';
 import { Layout } from '../components/organism/layout';
 import { Article } from '../components/organism/article';
@@ -12,7 +12,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
  * 記事のパスを取得する
  */
 export const getStaticPaths = async () => {
-  const posts = getAllPosts(['slug']);
+  const posts = getAllLocalPosts(['slug']);
   return {
     paths: posts.map((post) => {
       return {
@@ -29,7 +29,7 @@ export const getStaticPaths = async () => {
  * 記事の内容を取得する
  */
 export const getStaticProps = async ({ params }: any) => {
-  const posts = getAllPosts(['slug', 'title', 'date', 'content', 'tags']);
+  const posts = await getAllPosts();
   const index = posts.findIndex(p => p.slug === params.slug);
   // 前後の記事のslugを取得する
   const prevNext = {

@@ -19,6 +19,7 @@ export const getStaticProps = async () => {
         prev: null,
         next: null,
       },
+      revalidate: 6000,
     },
   };
 };
