@@ -2,7 +2,7 @@ import { NextPage, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import { getAllPosts, getPostBySlug } from '../lib/api';
-import { markdownToHtml } from '../lib/markdownToHtml';
+import { markdownToHtml } from '../lib/markdown-to-html';
 import { Layout } from '../components/organism/layout';
 import { Article } from '../components/organism/article';
 

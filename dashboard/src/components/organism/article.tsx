@@ -11,7 +11,6 @@ type Props = {
 };
 
 export const Article: React.FC<Props> = ({ post }) => {
-  console.log(post);
   return (
     <article className='container pb-16 mx-auto bg-white p-8 w-1/2 max-w-800 min-w-400'>
       <div className='mb-12'>
