@@ -2,7 +2,7 @@ import { NextPage, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import { getAllPosts, getPostBySlug } from '../lib/api';
-import markdownToHtml from '../lib/markdownToHtml';
+import { markdownToHtml } from '../lib/markdownToHtml';
 import { Layout } from '../components/organism/layout';
 import { Article } from '../components/organism/article';
 
@@ -29,14 +29,21 @@ export const getStaticPaths = async () => {
  * 記事の内容を取得する
  */
 export const getStaticProps = async ({ params }: any) => {
-  const post = getPostBySlug(params.slug, ['slug', 'title', 'date', 'content']);
+  const posts = getAllPosts(['slug', 'title', 'date', 'content', 'tags']);
+  const index = posts.findIndex(p => p.slug === params.slug);
+  // 前後の記事のslugを取得する
+  const prevNext = {
+    next: index - 1 > -1 ? posts[index - 1].slug : null,
+    prev: index + 1 < posts.length ? posts[index + 1].slug : null,
+  };
   // Markdown を HTML に変換する
-  const content = await markdownToHtml(post.content);
+  const content = await markdownToHtml(posts[index].content);
   // content を詰め直して返す
   return {
     props: {
       post: {
-        ...post,
+        ...posts[index],
+        ...prevNext,
         content,
       },
     },

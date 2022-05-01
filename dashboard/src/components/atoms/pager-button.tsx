@@ -2,14 +2,15 @@ import Link from 'next/link';
 import { PagerButtonItem } from '../../interface/pager-button-item';
 
 type Props = {
-  button: PagerButtonItem
+  content: string;
+  href: string;
 }
 
-export const PagerButton :React.FC<Props> = ({ button }) => {
+export const PagerButton :React.FC<Props> = ({ content, href }) => {
   return (
-    <li className='mx-2 text-lg'>
-      <Link href={button.href}>
-        <a>{button.name}</a>
+    <li className='mx-2 text-lg text-gray-400'>
+      <Link href={href}>
+        <a>{content}</a>
       </Link>
     </li>
   );

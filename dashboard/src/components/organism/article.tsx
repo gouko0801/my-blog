@@ -1,5 +1,5 @@
 import React from 'react';
-import { Post } from '../../lib/api';
+import { Post, SlugPost } from '../../lib/api';
 import { Date } from '../atoms/date';
 import { Tag } from '../atoms/tag';
 import { SubTitle } from '../atoms/sub-title';
@@ -7,10 +7,11 @@ import { Content } from '../atoms/content';
 import { Pager } from '../molecule/pager';
 
 type Props = {
-  post: Post;
+  post: SlugPost;
 };
 
 export const Article: React.FC<Props> = ({ post }) => {
+  console.log(post);
   return (
     <article className='container pb-16 mx-auto bg-white p-8 w-1/2 max-w-800 min-w-400'>
       <div className='mb-12'>
@@ -29,7 +30,10 @@ export const Article: React.FC<Props> = ({ post }) => {
       <Tag
         tag={post.tags}
       />
-      <Pager/>
+      <Pager
+        prev={post.prev}
+        next={post.next}
+      />
     </article>
   );
 };
