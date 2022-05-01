@@ -11,18 +11,18 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const LIMIT = 5;
 
 export const getStaticProps = async () => {
-  const posts = getAllPosts(['slug', 'title', 'date', 'tags', 'content']);
+  const allPosts = await getAllPosts();
   return {
-    props: { posts },
+    props: { allPosts },
   };
 };
 
-const Home: NextPage<Props> = ({ posts }) => {
+const Home: NextPage<Props> = ({ allPosts }) => {
   const router = useRouter();
   const query = router.query;
   const [page, setPage] = useState(1);
-  const pageMax = Math.ceil(posts.length / LIMIT);
-  const pagePosts = posts.filter((_, i) => i >= page * LIMIT - LIMIT && i <= page * LIMIT - 1);
+  const pageMax = Math.ceil(allPosts.length / LIMIT);
+  const pagePosts = allPosts.filter((_, i) => i >= page * LIMIT - LIMIT && i <= page * LIMIT - 1);
   const prev = page < pageMax ? `/?page=${page + 1}`: null;
   const next = page > 1 ? `/?page=${page - 1}`: null;
 
@@ -32,6 +32,7 @@ const Home: NextPage<Props> = ({ posts }) => {
       setPage(newPage);
     }
   }, [query, router]);
+
   return (
     <Layout>
       <ArticleList
