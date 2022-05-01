@@ -1,17 +1,28 @@
 import Link from 'next/link';
+import React from 'react';
 import styles from '../../styles/Home.module.css';
 import { MainTitle } from '../atoms/main-title';
+import { TabButtonList } from './tab-button-list';
 
-export const Header = () => {
+type Props = {
+  path?: string;
+}
+
+export const Header: React.FC<Props> = ({ path }) => {
   return (
     <header className={styles.header}>
-      <Link href="/">
-        <a>
-          <MainTitle
-            title="raiku blog"
-          />
-        </a>
-      </Link>
+      <div className='w-3/4 m-0 m-auto'>
+        <Link href="/">
+          <a>
+            <MainTitle
+              title="raiku blog"
+            />
+          </a>
+        </Link>
+        <TabButtonList
+          selected={path}
+        />
+      </div>
     </header>
   );
 };

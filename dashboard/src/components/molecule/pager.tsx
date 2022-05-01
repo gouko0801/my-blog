@@ -1,6 +1,5 @@
 import React from 'react';
-import { PagerButtonItem } from '../../interface/pager-button-item';
-import { PagerButton } from '../atoms/pager-button';
+import { LinkButton } from '../atoms/link-button';
 
 type Props = {
   prev: string | null;
@@ -12,13 +11,13 @@ export const Pager: React.FC<Props> = ({ prev, next }) => {
   return (
     <ul className='flex p-0 mt-8 mb-4 justify-center'>
       {next && (
-        <PagerButton
+        <LinkButton
           content={'<<'}
           href={next!}
         />
       )}
       {prev && (
-        <PagerButton
+        <LinkButton
           content={'>>'}
           href={prev!}
         />
