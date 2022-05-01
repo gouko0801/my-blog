@@ -1,4 +1,4 @@
 export interface PagerButtonItem {
-  name: string;
-  href: string;
+  prev: string | null;
+  next: string | null;
 }

@@ -19,7 +19,6 @@ const Home: NextPage<Props> = ({ allPosts }) => {
       <ArticleList
         posts={allPosts}
       />
-      <Pager/>
     </Layout>
   );
 };

@@ -1,28 +1,28 @@
-import { PagerButton } from '../atoms/pager-button';
+import React from 'react';
 import { PagerButtonItem } from '../../interface/pager-button-item';
+import { PagerButton } from '../atoms/pager-button';
 
-const buttonItem: PagerButtonItem[] = [
-  {
-    name: '',
-    href: '/',
-  },
-  {
-    name: '',
-    href: '/',
-  },
-];
+type Props = {
+  prev: string | null;
+  next: string | null;
+}
 
-export const Pager = () => {
+
+export const Pager: React.FC<Props> = ({ prev, next }) => {
   return (
-    <ul className='flex p-0 mt-8 mb-4'>
-      {buttonItem.map((b, i) => {
-        return (
-          <PagerButton
-            key={i}
-            button={b}
-          />
-        );
-      })}
+    <ul className='flex p-0 mt-8 mb-4 justify-center'>
+      {next && (
+        <PagerButton
+          content={'<<'}
+          href={next!}
+        />
+      )}
+      {prev && (
+        <PagerButton
+          content={'>>'}
+          href={prev!}
+        />
+      )}
     </ul>
   );
 };
