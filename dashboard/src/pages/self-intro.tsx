@@ -25,7 +25,6 @@ export const getStaticProps = async () => {
 
 const SelfIntro: NextPage<Props> = ({ post }) => {
   const router = useRouter();
-  console.log(router.pathname);
   return (
     <Layout
       title={post.title}
