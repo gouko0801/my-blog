@@ -8,7 +8,7 @@ import { markdownToHtml } from '../lib/markdown-to-html';
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 export const getStaticProps = async () => {
-  const post = getPostBySlug('profile', ['slug', 'title', 'date', 'content', 'tags']);
+  const post = getPostBySlug('about-raiku', ['slug', 'title', 'date', 'content', 'tags']);
   const content = await markdownToHtml(post.content);
   return {
     props: {
