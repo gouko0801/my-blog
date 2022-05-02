@@ -1,5 +1,5 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
-import { getAllLocalPosts } from '../lib/api';
+import { getAllLocalPosts } from '../lib/get-posts';
 import { Layout } from '../components/organism/layout';
 import { ArticleList } from '../components/molecule/article-list';
 import { useRouter } from 'next/router';

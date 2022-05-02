@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { gunzipSync } from 'zlib';
-import { createNotePosts, noteFetch } from './note-api';
+import { createNotePosts, noteFetch } from './note-fetch';
 import dayjs from 'dayjs';
 
 export type LocalPost = {

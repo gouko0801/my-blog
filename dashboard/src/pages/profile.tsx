@@ -2,7 +2,7 @@ import { NextPage, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import { Article } from '../components/organism/article';
 import { Layout } from '../components/organism/layout';
-import { getPostBySlug } from '../lib/api';
+import { getPostBySlug } from '../lib/get-posts';
 import { markdownToHtml } from '../lib/markdown-to-html';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
@@ -18,7 +18,6 @@ export const getStaticProps = async () => {
         prev: null,
         next: null,
       },
-      revalidate: 6000,
     },
   };
 };

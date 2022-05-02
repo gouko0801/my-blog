@@ -1,5 +1,5 @@
 import React from 'react';
-import { SlugPost } from '../../lib/api';
+import { SlugPost } from '../../lib/get-posts';
 import { Date } from '../atoms/date';
 import { Tag } from '../atoms/tag';
 import { SubTitle } from '../atoms/sub-title';

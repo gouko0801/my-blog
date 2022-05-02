@@ -1,12 +1,12 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
-import { createNotePosts } from '../lib/note-api';
+import { createNotePosts } from '../lib/note-fetch';
 import { Layout } from '../components/organism/layout';
 import { ArticleList } from '../components/molecule/article-list';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Pager } from '../components/molecule/pager';
-import { noteFetch } from '../lib/note-api';
-import { AllPost } from '../lib/api';
+const fetch = require('isomorphic-fetch');
+import { AllPost } from '../lib/get-posts';
 
 const Notes: NextPage = () => {
   const router = useRouter();
@@ -19,9 +19,9 @@ const Notes: NextPage = () => {
   useEffect(() => {
     if (router.isReady) {
       const fetchData = async (page: number) => {
-        const gzip = await noteFetch(page);
-        const { notePosts, isLastPage } = createNotePosts(gzip);
-        console.log(notePosts);
+        const res = await fetch(`/api/note?page=${page}`);
+        const json = await res.json();
+        const { notePosts, isLastPage } = createNotePosts(json);
         setPosts(notePosts);
         setPrev(notePosts.length === 0 && !isLastPage ? null : `/notes?page=${page + 1}`);
         setNext(page > 1 && notePosts.length > 0 ? `/notes?page=${page - 1}` : null);
