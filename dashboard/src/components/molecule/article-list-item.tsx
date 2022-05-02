@@ -1,5 +1,5 @@
 import React from 'react';
-import { AllPost } from '../../lib/api';
+import { AllPost } from '../../lib/get-posts';
 import styles from '../../styles/Home.module.css';
 import { Date } from '../atoms/date';
 import { Tag } from '../atoms/tag';

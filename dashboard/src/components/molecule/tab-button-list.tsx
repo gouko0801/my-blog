@@ -4,21 +4,26 @@ import { LinkButton } from '../atoms/link-button';
 type Props = {
   selected?: string;
 }
-const addClass = 'text-lg text-gray-400 mr-4';
+const addClass = 'text-lg text-gray-400 mr-6';
 
 
 export const TabButtonList: React.FC<Props> = ({ selected }) => {
   return (
     <ul className='flex p-0 my-2'>
       <LinkButton
-        content={'Home'}
+        content={'Posts'}
         href={'/'}
-        className={!selected ? `${addClass} underline underline-offset-0 mr-2` : addClass}
+        className={addClass}
       />
       <LinkButton
-        content={'SelfIntro'}
-        href={'/self-intro'}
-        className={selected === '/self-intro' ? `${addClass} underline underline-offset-0 mr-2` : addClass}
+        content={'Note'}
+        href={'/notes'}
+        className={addClass}
+      />
+      <LinkButton
+        content={'Profile'}
+        href={'/profile'}
+        className={addClass}
       />
     </ul>
   );

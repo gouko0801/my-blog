@@ -1,9 +1,29 @@
 const fetch = require('isomorphic-fetch');
-const zlib = require('zlib');
-const { pipeline } = require('stream');
+import { AllPost } from './get-posts';
+import dayjs from 'dayjs';
 
-export const noteFetch = async (query?: string) => {
-  return await fetch(`https://note.com/api/v2/creators/portrait_timer/contents?${query ?? 'kind=note&page=1'}`, {
+const NOTE_URL = 'https://note.com/portrait_timer/n/';
+
+export const noteFetch = async (page: number = 1) => {
+  return await fetch(`https://note.com/api/v2/creators/portrait_timer/contents?kind=note&page=${page}`, {
     method: 'GET',
   });
+};
+
+/**
+ * gzip圧縮されたnote APIのレスポンスからnotePostsを作成する
+ */
+  export const createNotePosts = (res: any): { notePosts: AllPost[], isLastPage: boolean } => {
+  const notePosts: AllPost[] = res.data.contents.map((d: any) => {
+    return {
+      slug: `${NOTE_URL}${d.key}`,
+      content: d.body,
+      title: d.name,
+      date: dayjs(d.publishAt).format('YYYY/MM/DD'),
+      tags: '#Note',
+      isNote: true,
+    } as AllPost;
+  });
+  const isLastPage: boolean = res.data.isLastPage;
+  return { notePosts, isLastPage };
 };

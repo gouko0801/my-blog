@@ -2,15 +2,14 @@ import { NextPage, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import { Article } from '../components/organism/article';
 import { Layout } from '../components/organism/layout';
-import { getPostBySlug } from '../lib/api';
+import { getPostBySlug } from '../lib/get-posts';
 import { markdownToHtml } from '../lib/markdown-to-html';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 export const getStaticProps = async () => {
-  const post = getPostBySlug('selfintro', ['slug', 'title', 'date', 'content', 'tags']);
+  const post = getPostBySlug('about-raiku', ['slug', 'title', 'date', 'content', 'tags']);
   const content = await markdownToHtml(post.content);
-  // content を詰め直して返す
   return {
     props: {
       post: {
@@ -19,12 +18,11 @@ export const getStaticProps = async () => {
         prev: null,
         next: null,
       },
-      revalidate: 6000,
     },
   };
 };
 
-const SelfIntro: NextPage<Props> = ({ post }) => {
+const Profile: NextPage<Props> = ({ post }) => {
   const router = useRouter();
   return (
     <Layout
@@ -38,4 +36,4 @@ const SelfIntro: NextPage<Props> = ({ post }) => {
   );
 };
 
-export default SelfIntro;
+export default Profile;
