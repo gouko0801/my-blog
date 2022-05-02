@@ -1,5 +1,4 @@
-import { remark } from 'remark';
-import html from 'remark-html';
+import { micromark } from 'micromark';
 
 /**
  * Markdown を解析して HTML にして返す
@@ -7,6 +6,5 @@ import html from 'remark-html';
  * @returns HTML
  */
 export const markdownToHtml = async (markdown: string) => {
-  const result = await remark().use(html).process(markdown);
-  return result.toString();
+  return micromark(markdown, { allowDangerousHtml: true });
 };
