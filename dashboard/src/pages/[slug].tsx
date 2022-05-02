@@ -29,12 +29,12 @@ export const getStaticPaths = async () => {
  * 記事の内容を取得する
  */
 export const getStaticProps = async ({ params }: any) => {
-  const posts = await getAllPosts();
+  const posts = getAllLocalPosts(['slug', 'title', 'date', 'content', 'tags']);
   const index = posts.findIndex(p => p.slug === params.slug);
   // 前後の記事のslugを取得する
   const prevNext = {
-    next: index - 1 > -1 ? posts[index - 1].slug : null,
-    prev: index + 1 < posts.length ? posts[index + 1].slug : null,
+    next: index - 1 > -1 ? `/${posts[index - 1].slug}` : null,
+    prev: index + 1 < posts.length ? `/${posts[index + 1].slug}` : null,
   };
   // Markdown を HTML に変換する
   const content = await markdownToHtml(posts[index].content);
