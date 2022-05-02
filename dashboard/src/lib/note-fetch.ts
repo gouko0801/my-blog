@@ -13,7 +13,7 @@ export const noteFetch = async (page: number = 1) => {
 /**
  * gzip圧縮されたnote APIのレスポンスからnotePostsを作成する
  */
-  export const createNotePosts = (res: any): { notePosts: AllPost[], isLastPage: boolean } => {
+export const createNotePosts = (res: any): { notePosts: AllPost[]; isLastPage: boolean } => {
   const notePosts: AllPost[] = res.data.contents.map((d: any) => {
     return {
       slug: `${NOTE_URL}${d.key}`,

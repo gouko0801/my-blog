@@ -25,13 +25,8 @@ export const getStaticProps = async () => {
 const Profile: NextPage<Props> = ({ post }) => {
   const router = useRouter();
   return (
-    <Layout
-      title={post.title}
-      path={router.pathname}
-    >
-      <Article
-        post={post}
-      />
+    <Layout title={post.title} path={router.pathname}>
+      <Article post={post} />
     </Layout>
   );
 };

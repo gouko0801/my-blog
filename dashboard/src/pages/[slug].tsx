@@ -1,7 +1,7 @@
 import { NextPage, InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import { getAllLocalPosts, getAllPosts } from '../lib/get-posts';
+import { getAllLocalPosts } from '../lib/get-posts';
 import { markdownToHtml } from '../lib/markdown-to-html';
 import { Layout } from '../components/organism/layout';
 import { Article } from '../components/organism/article';
@@ -30,7 +30,7 @@ export const getStaticPaths = async () => {
  */
 export const getStaticProps = async ({ params }: any) => {
   const posts = getAllLocalPosts(['slug', 'title', 'date', 'content', 'tags']);
-  const index = posts.findIndex(p => p.slug === params.slug);
+  const index = posts.findIndex((p) => p.slug === params.slug);
   // 前後の記事のslugを取得する
   const prevNext = {
     next: index - 1 > -1 ? `/${posts[index - 1].slug}` : null,
@@ -56,12 +56,8 @@ const Post: NextPage<Props> = ({ post }) => {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout
-      title={post.title}
-    >
-      <Article
-        post={post}
-      />
+    <Layout title={post.title}>
+      <Article post={post} />
     </Layout>
   );
 };

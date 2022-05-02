@@ -32,13 +32,8 @@ const Notes: NextPage = () => {
 
   return (
     <Layout>
-      <ArticleList
-        posts={posts}
-      />
-      <Pager
-        prev={prev}
-        next={next}
-      />
+      <ArticleList posts={posts} />
+      <Pager prev={prev} next={next} />
     </Layout>
   );
 };

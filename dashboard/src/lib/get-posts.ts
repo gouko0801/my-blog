@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { gunzipSync } from 'zlib';
 import { createNotePosts, noteFetch } from './note-fetch';
-import dayjs from 'dayjs';
 
 export type LocalPost = {
   slug: string;
@@ -20,7 +18,7 @@ export type SlugPost = LocalPost & {
 
 export type AllPost = LocalPost & {
   isNote?: boolean;
-}
+};
 type Field = 'slug' | 'content' | 'title' | 'date' | 'tags';
 
 const postsDirectory = path.join(process.cwd(), 'content');
@@ -51,7 +49,7 @@ export const getPostBySlug = (slug: string, fields: Field[] = []) => {
     isNote: false,
   };
 
-  fields.forEach(field => {
+  fields.forEach((field) => {
     switch (field) {
       case 'slug':
         items[field] = slug;
@@ -91,10 +89,9 @@ export const getAllPosts = async () => {
   if (gzip) {
     const { notePosts } = createNotePosts(gzip);
     const dto = localPosts.concat(notePosts);
-    posts = dto.sort((a, b) => (a.date > b.date ? - 1 : 1));
+    posts = dto.sort((a, b) => (a.date > b.date ? -1 : 1));
   } else {
-    posts = localPosts.sort((a, b) => (a.date > b.date ? - 1 : 1));
+    posts = localPosts.sort((a, b) => (a.date > b.date ? -1 : 1));
   }
   return posts;
 };
-

@@ -15,9 +15,7 @@ export const Layout: React.FC<Props> = ({ children, title, path }) => {
     <div className='bg-gray-50'>
       <Meta title={title} />
       <Header path={path} />
-      <main className={styles.main}>
-        {children}
-      </main>
+      <main className={styles.main}>{children}</main>
       <Footer />
     </div>
   );

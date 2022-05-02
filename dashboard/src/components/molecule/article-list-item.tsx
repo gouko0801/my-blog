@@ -15,14 +15,9 @@ export const ArticleListItem: React.FC<Props> = ({ post }) => {
     <li className={styles.card}>
       <div className='border-solid border-b border-gray-200 pb-2 mb-2'>
         <a href={post.slug} key={post.slug} target={post.isNote ? '_blank' : '_self'} rel='noreferrer'>
-          <SubTitle
-            title={post.title}
-            className='text-xl'
-          />
+          <SubTitle title={post.title} className='text-xl' />
           <Date date={post.date} />
-          <ItemContent
-            content={post.content}
-          />
+          <ItemContent content={post.content} />
         </a>
       </div>
       <Tag tag={post.tags} />

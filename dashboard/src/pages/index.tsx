@@ -23,8 +23,8 @@ const Index: NextPage<Props> = ({ allPosts }) => {
   const [page, setPage] = useState(1);
   const pageMax = Math.ceil(allPosts.length / LIMIT);
   const pagePosts = allPosts.filter((_, i) => i >= page * LIMIT - LIMIT && i <= page * LIMIT - 1);
-  const prev = page < pageMax ? `/?page=${page + 1}`: null;
-  const next = page > 1 ? `/?page=${page - 1}`: null;
+  const prev = page < pageMax ? `/?page=${page + 1}` : null;
+  const next = page > 1 ? `/?page=${page - 1}` : null;
 
   useEffect(() => {
     if (router.isReady) {
@@ -35,13 +35,8 @@ const Index: NextPage<Props> = ({ allPosts }) => {
 
   return (
     <Layout>
-      <ArticleList
-        posts={pagePosts}
-      />
-      <Pager
-        prev={prev}
-        next={next}
-      />
+      <ArticleList posts={pagePosts} />
+      <Pager prev={prev} next={next} />
     </Layout>
   );
 };
