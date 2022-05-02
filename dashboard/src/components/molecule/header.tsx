@@ -15,7 +15,7 @@ export const Header: React.FC<Props> = ({ path }) => {
         <Link href="/">
           <a>
             <MainTitle
-              title="raiku blog"
+              title="portrait timer blog"
             />
           </a>
         </Link>

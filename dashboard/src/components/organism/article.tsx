@@ -12,7 +12,7 @@ type Props = {
 
 export const Article: React.FC<Props> = ({ post }) => {
   return (
-    <article className='pb-16 mx-auto bg-white p-8 w-3/4 max-w-3xl min-w-min'>
+    <article className='pb-16 mx-auto bg-white p-8 max-w-3xl min-w-min'>
       <div className='mb-12'>
         <SubTitle
           title={post.title}

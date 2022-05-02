@@ -1,7 +1,5 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import React from 'react';
-import styles from '../styles/Home.module.css';
 
 type Props = {
   title?: string;
@@ -10,9 +8,10 @@ type Props = {
 export const Meta: React.FC<Props> = (props) => {
   return (
     <Head>
-      <title>{props.title ?? 'raiku blog'}</title>
-      <meta name="description" content="konnichiha" />
-      <link rel="icon" href="/favicon.ico" />
+      <title>{props.title ?? 'portrait timer blog'}</title>
+      <meta name='description' content='hello!' />
+      <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'></meta>
+      <link rel='icon' href='/favicon.ico' />
     </Head>
   );
 };
