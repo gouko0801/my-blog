@@ -9,7 +9,6 @@ const fetch = require('isomorphic-fetch');
 import { AllPost } from '../lib/get-posts';
 
 const Notes: NextPage = () => {
-  console.log('test');
   const router = useRouter();
   const query = router.query;
   const [posts, setPosts] = useState<AllPost[]>([]);
@@ -23,7 +22,7 @@ const Notes: NextPage = () => {
         const json = await res.json();
         const { notePosts, isLastPage } = createNotePosts(json);
         setPosts(notePosts);
-        setPrev(notePosts.length === 0 && !isLastPage ? null : `/notes?page=${page + 1}`);
+        setPrev(notePosts.length === 0 || isLastPage ? null : `/notes?page=${page + 1}`);
         setNext(page > 1 && notePosts.length > 0 ? `/notes?page=${page - 1}` : null);
       };
       const newPage = query.page ? Number(query.page) : 1;
