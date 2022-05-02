@@ -1,5 +1,5 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
-import { getAllPosts } from '../lib/api';
+import { getAllLocalPosts } from '../lib/api';
 import { Layout } from '../components/organism/layout';
 import { ArticleList } from '../components/molecule/article-list';
 import { useRouter } from 'next/router';
@@ -11,13 +11,13 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>;
 const LIMIT = 5;
 
 export const getStaticProps = async () => {
-  const allPosts = await getAllPosts();
+  const allPosts = getAllLocalPosts(['slug', 'title', 'date', 'content', 'tags']);
   return {
     props: { allPosts },
   };
 };
 
-const Home: NextPage<Props> = ({ allPosts }) => {
+const Index: NextPage<Props> = ({ allPosts }) => {
   const router = useRouter();
   const query = router.query;
   const [page, setPage] = useState(1);
@@ -46,4 +46,4 @@ const Home: NextPage<Props> = ({ allPosts }) => {
   );
 };
 
-export default Home;
+export default Index;

@@ -11,13 +11,8 @@ export const TabButtonList: React.FC<Props> = ({ selected }) => {
   return (
     <ul className='flex p-0 my-2'>
       <LinkButton
-        content={'Home'}
-        href={'/'}
-        className={addClass}
-      />
-      <LinkButton
         content={'Posts'}
-        href={'/posts'}
+        href={'/'}
         className={addClass}
       />
       <LinkButton

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { gunzipSync } from 'zlib';
-import { noteFetch } from './note-fetch';
+import { createNotePosts, noteFetch } from './note-api';
 import dayjs from 'dayjs';
 
 export type LocalPost = {
@@ -24,7 +24,6 @@ export type AllPost = LocalPost & {
 type Field = 'slug' | 'content' | 'title' | 'date' | 'tags';
 
 const postsDirectory = path.join(process.cwd(), 'content');
-const NOTE_URL = 'https://note.com/portrait_timer/n/';
 
 /**
  * postsDirectory 以下のmdファイル名(拡張子除く)を取得する
@@ -99,29 +98,3 @@ export const getAllPosts = async () => {
   return posts;
 };
 
-/**
- * gzip圧縮されたnote APIのレスポンスからnotePostsを作成する
- */
-export const createNotePosts = (gzip: any): { notePosts: AllPost[], isLastPage: boolean } => {
-  let buffer;
-  try {
-    buffer = gunzipSync(gzip.body._handle.buffer);
-  } catch(e) {
-    console.log(gzip.body._handle.buffer);
-    return { notePosts: [], isLastPage: false };
-  }
-  const resBody = buffer.toString('utf8');
-  const json = JSON.parse(resBody);
-  const notePosts: AllPost[] = json.data.contents.map((d: any) => {
-    return {
-      slug: `${NOTE_URL}${d.key}`,
-      content: d.body,
-      title: d.name,
-      date: dayjs(d.publishAt).format('YYYY/MM/DD'),
-      tags: '#Note',
-      isNote: true,
-    } as AllPost;
-  });
-  const isLastPage: boolean = json.data.isLastPage;
-  return { notePosts, isLastPage };
-};

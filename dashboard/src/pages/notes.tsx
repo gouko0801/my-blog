@@ -1,51 +1,41 @@
 import type { InferGetStaticPropsType, NextPage } from 'next';
-import { createNotePosts, getAllLocalPosts } from '../lib/api';
+import { createNotePosts } from '../lib/note-api';
 import { Layout } from '../components/organism/layout';
 import { ArticleList } from '../components/molecule/article-list';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Pager } from '../components/molecule/pager';
-import { noteFetch } from '../lib/note-fetch';
+import { noteFetch } from '../lib/note-api';
+import { AllPost } from '../lib/api';
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>;
-// 1ページ辺りの記事の最大値
-const LIMIT = 12;
-
-export const getStaticProps = async () => {
-  const gzip = await noteFetch();
-  const { notePosts, isLastPage } = createNotePosts(gzip);
-  return {
-    props: { notePosts, isLastPage },
-  };
-};
-
-const Posts: NextPage<Props> = ({ notePosts, isLastPage }) => {
+const Notes: NextPage = () => {
   const router = useRouter();
   const query = router.query;
-  const [posts, setPosts] = useState(notePosts);
-  const [page, setPage] = useState(1);
-  const pageMax = Math.ceil(posts.length / LIMIT);
-  const pagePosts = posts.filter((_, i) => i >= page * LIMIT - LIMIT && i <= page * LIMIT - 1);
-  const prev = page < pageMax ? `/notes?page=${page + 1}` : null;
-  const next = isLastPage ? null : `/notes?page=${page - 1}`;
+  const [posts, setPosts] = useState<AllPost[]>([]);
+  const [page, setPage] = useState(query.page ?? 1);
+  const [prev, setPrev] = useState<string | null>(null);
+  const [next, setNext] = useState<string | null>(null);
 
   useEffect(() => {
     if (router.isReady) {
       const fetchData = async (page: number) => {
-        const gzip = await noteFetch(`page=${page}`);
+        const gzip = await noteFetch(page);
         const { notePosts, isLastPage } = createNotePosts(gzip);
+        console.log(notePosts);
         setPosts(notePosts);
+        setPrev(notePosts.length === 0 && !isLastPage ? null : `/notes?page=${page + 1}`);
+        setNext(page > 1 && notePosts.length > 0 ? `/notes?page=${page - 1}` : null);
+        setPage(page);
       };
       const newPage = query.page ? Number(query.page) : 1;
       fetchData(newPage);
-      setPage(newPage);
     }
   }, [query, router]);
 
   return (
     <Layout>
       <ArticleList
-        posts={pagePosts}
+        posts={posts}
       />
       <Pager
         prev={prev}
@@ -55,4 +45,4 @@ const Posts: NextPage<Props> = ({ notePosts, isLastPage }) => {
   );
 };
 
-export default Posts;
+export default Notes;
